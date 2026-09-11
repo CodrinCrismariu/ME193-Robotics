@@ -130,8 +130,9 @@ class doubleMotor(_CardReader, le.DoubleMotor):
 
     def yaw(self):
         """Yaw in degrees since the last reset_heading() call.
-        Positive = clockwise (drifted right), negative = counter-clockwise."""
-        return float(self.imu_device.yaw)
+        Negative = clockwise (drifted right), positive = counter-clockwise.
+        Wraps at +/-180: the hardware reports decidegrees, so this divides by 10."""
+        return float(self.imu_device.yaw) / 10.0
 
     def gyro_z(self):
         """Z-axis angular velocity (raw int16). Positive = rotating clockwise."""
