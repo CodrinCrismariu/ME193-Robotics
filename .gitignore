@@ -20,3 +20,11 @@
 **/__pycache__/
 **/*.pyc
 **/*.pyo
+
+# Virtual environments -- rebuild with the pip installs in TRIKE.md
+**/.venv/
+**/venv/
+
+# MediaPipe hand model (7.8 MB binary) -- download it with the curl command
+# in "Public stuff/useful libraries/TRIKE.md"
+**/hand_landmarker.task
