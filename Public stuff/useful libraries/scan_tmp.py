@@ -1,5 +1,14 @@
 """List every LEGO Education device in Bluetooth range with its connection-card color/serial."""
 import asyncio
+import sys
+
+# LEGO advertises names containing coloured-square emoji, which the default
+# Windows console codepage (cp1252) cannot encode -- printing one would abort
+# the whole scan.
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
 from bleak import BleakScanner
 from legoeducation.color_map import _firmware_to_app
 
@@ -32,4 +41,11 @@ async def main():
         print(f"  {name!r:28} product_id=0x{pid:04X}  card_color={color} ({COLORS.get(color,'?')})  "
               f"card_serial={serial:04d}  rssi={rssi}")
 
-asyncio.run(main())
+try:
+    asyncio.run(main())
+except Exception as exc:
+    # A switched-off radio otherwise dumps a bleak traceback that buries the
+    # one line that matters.
+    from trike import bluetooth_error
+    problem = bluetooth_error()
+    raise SystemExit(problem if problem else "scan failed: {}".format(exc))

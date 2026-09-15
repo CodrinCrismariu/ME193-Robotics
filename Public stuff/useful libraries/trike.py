@@ -35,8 +35,24 @@ left wheel correspondingly turns slower.
 
 ROBOT GEOMETRY
 --------------
-Measured on this robot: track 70 mm, wheelbase 85 mm, drive wheels 62 mm
-diameter. Only the RATIO W/2L enters the kinematics -- here 70/170 = 0.412.
+Measured on this robot: track 86 mm, wheelbase 80 mm, drive wheels 62 mm
+diameter. Only the RATIO W/2L enters the kinematics -- here 86/160 = 0.538.
+
+GEARED DRIVE
+------------
+The drive motor no longer turns the wheels 1:1. A 36-tooth black double-bevel
+gear on the motor drives a 20-tooth tan one on each wheel axle, so the wheels
+turn 36/20 = 1.8x FASTER than the motor.
+
+That ratio does NOT appear in the kinematics below, and this is worth being
+clear about: both drive wheels share identical gearing, so it scales v_left and
+v_right equally. The no-slip condition constrains only their RATIO, which is
+unchanged. The gearing matters for ground speed and odometry, nothing else.
+
+What DID change the kinematics is the geometry the gears forced: the pair of
+gears pushed the drive wheels 16 mm further apart (two 1-stud-wide gears) and
+the rebuild moved the steered wheel in to 80 mm. W/2L rose from 0.412 to 0.538,
+so the two drive wheels now differ by ~30% more at the same steering angle.
 """
 
 import math
@@ -54,9 +70,16 @@ STEER_CARD_COLOR = le.LEGO_COLOR_GREEN
 STEER_CARD_SERIAL = 994
 
 # --- Geometry (measured on this robot) -----------------------------------
-WHEELBASE_MM = 85.0     # L: drive axle -> steered wheel contact point
-TRACK_MM = 70.0         # W: between the two drive wheel centres
+WHEELBASE_MM = 80.0     # L: drive axle -> steered wheel contact point
+TRACK_MM = 86.0         # W: between the two drive wheel centres
 DRIVE_WHEEL_DIA_MM = 62.0   # not used by the kinematics; kept for odometry
+
+# Wheel revolutions per motor revolution: 36-tooth black double-bevel gear on
+# the motor driving a 20-tooth tan one on the wheel. >1 means geared for SPEED.
+# Cancels out of the kinematics (both wheels share it) -- it only sets how much
+# ground speed a given motor command buys, so it lives here for odometry and
+# for anyone wondering why the robot got quicker.
+DRIVE_GEAR_RATIO = 36.0 / 20.0      # 1.8
 
 # Motor degrees per degree of actual wheel steering. 1.0 if the motor drives
 # the steering wheel directly; change it if there is gearing in between.
@@ -68,13 +91,17 @@ STEER_GEAR_RATIO = 1.0
 # to be measured once -- run read_abs.py with the wheel straight to re-check.
 STEER_CENTER_ABS = 98
 
-# The drive motor's positive direction is opposite this module's body frame
-# (x forward), so commanded speeds are negated on the way out. Set to +1 if
-# you rebuild the robot and forward/backward come out reversed again.
-DRIVE_SIGN = -1
+# The drive motor's positive direction relative to this module's body frame
+# (x forward). A single external gear mesh REVERSES rotation, so adding the
+# 36T->20T pair flipped this from -1 back to +1. This is the one constant here
+# that is inferred rather than measured -- if forward and backward come out
+# reversed on the first run, flip it back to -1 and nothing else.
+DRIVE_SIGN = +1
 
 # Set to True if a LEFT turn makes the robot swing RIGHT: it means the left
-# and right drive outputs are mirrored relative to the steering.
+# and right drive outputs are mirrored relative to the steering. This is a
+# port-mapping fact, not a direction fact -- the gears do not change which
+# motor output reaches which side of the robot, so it stays True.
 SWAP_DRIVE_WHEELS = True
 
 MAX_STEER_DEG = 60.0    # beyond this the inner wheel speed blows up
@@ -132,6 +159,63 @@ def steer_for_radius(radius_mm, wheelbase=WHEELBASE_MM):
     return math.degrees(math.atan2(wheelbase, radius_mm)) - (0.0 if radius_mm > 0 else 180.0)
 
 
+# Reason codes bleak reports when the radio cannot be used, mapped to advice
+# about the LAPTOP rather than the robot.
+_BT_ADVICE = {
+    "POWERED_OFF": """this computer's Bluetooth radio is switched OFF.
+  Turn it on: Win+A and click the Bluetooth tile, or
+  Settings -> Bluetooth & devices -> Bluetooth toggle.""",
+    "NO_BLUETOOTH": """this computer has no usable Bluetooth adapter.
+  Check Device Manager -> Bluetooth; a USB dongle may have dropped out.""",
+    "NO_BLE_CENTRAL_ROLE": """the adapter does not support Bluetooth Low Energy.
+  LEGO hubs are BLE-only, so this adapter cannot talk to them.""",
+    "DENIED_BY_USER": """Bluetooth permission was denied for this app.
+  Settings -> Privacy & security -> Bluetooth, and allow desktop apps.""",
+    "DENIED_BY_SYSTEM": """Windows is blocking Bluetooth access for this app.
+  Settings -> Privacy & security -> Bluetooth, and allow desktop apps.""",
+}
+
+
+def bluetooth_error():
+    """Why the Bluetooth radio is unusable, as a sentence -- or None if it is fine.
+
+    Worth the extra half-second at startup: the legoeducation library reports a
+    switched-off RADIO and a switched-off MOTOR identically, as "could not find
+    device". That sends you hunting around the robot for a fault that is on the
+    laptop. Checking first turns the commonest failure into a sentence that says
+    what to do.
+
+    Never raises, and returns None whenever it cannot tell -- an unknown state
+    must fall through to the normal connect path rather than block it.
+    """
+    try:
+        import asyncio
+
+        from bleak import BleakScanner
+        from bleak.exc import BleakBluetoothNotAvailableError
+    except Exception:
+        return None
+
+    async def probe():
+        # Starting and immediately stopping a scan is the cheapest way to make
+        # the backend actually touch the radio; nothing is discovered.
+        scanner = BleakScanner()
+        await scanner.start()
+        await scanner.stop()
+
+    try:
+        asyncio.run(probe())
+    except BleakBluetoothNotAvailableError as exc:
+        reason = getattr(getattr(exc, "reason", None), "name", "")
+        return "Bluetooth unavailable -- " + _BT_ADVICE.get(
+            reason, "the radio is not available ({}).".format(exc))
+    except RuntimeError:
+        return None          # already inside an event loop; cannot probe
+    except Exception:
+        return None          # some other fault: let connect() report it
+    return None
+
+
 class Trike:
     """Double motor for drive, single motor for steering."""
 
@@ -142,20 +226,32 @@ class Trike:
         self.steer = le.SingleMotor()
         self._steer_deg = 0.0
 
-    def connect(self, center=True, progress=None):
+    def connect(self, center=True, progress=None, notify_ms=None):
         """Connect both motors.
 
-        center:   centre the steering as part of connecting. Pass False from a
-                  GUI -- centring issues BLOCKING motor moves, and if the wheel
-                  cannot reach its target the call never returns.
-        progress: optional callback(str) for stage reporting.
+        center:    centre the steering as part of connecting. Pass False from a
+                   GUI -- centring issues BLOCKING motor moves, and if the wheel
+                   cannot reach its target the call never returns.
+        progress:  optional callback(str) for stage reporting.
+        notify_ms: IMU/motor notification interval. The library default is
+                   100 ms (10 Hz), too slow for heading control; pass ~20 for
+                   50 Hz. Minimum accepted by the library is 15.
         """
         say = progress or (lambda _m: None)
+        # Check the radio BEFORE the motors, so a laptop-side fault is not
+        # misreported as a missing robot.
+        problem = bluetooth_error()
+        if problem:
+            raise ConnectionError(problem)
         say("connecting to drive motor ...")
         # le.DoubleMotor / le.SingleMotor do NOT raise when the device is not
         # found -- they print and return, leaving .connected False. Without
         # this check the caller drives a dead link forever.
-        self.drive.connect(card_color=DRIVE_CARD_COLOR, card_serial=DRIVE_CARD_SERIAL)
+        if notify_ms is None:
+            self.drive.connect(card_color=DRIVE_CARD_COLOR, card_serial=DRIVE_CARD_SERIAL)
+        else:
+            self.drive.connect(card_color=DRIVE_CARD_COLOR, card_serial=DRIVE_CARD_SERIAL,
+                               device_notification_delay=notify_ms)
         if not self.drive.connected:
             raise ConnectionError(
                 f"double motor not found (card {DRIVE_CARD_SERIAL:04d}) -- is it powered on?")
@@ -251,6 +347,20 @@ class Trike:
 
     def turn_radius(self, speed=40, radius_mm=300.0):
         return self.drive_at(speed, steer_for_radius(radius_mm, self.wheelbase))
+
+    # --- heading (yaw) --------------------------------------------------
+    def heading(self):
+        """Heading in degrees since the last reset_heading(), wrapped to +/-180.
+
+        The hardware reports decidegrees, hence the /10. Sign matches the
+        steering convention: POSITIVE is counter-clockwise / left.
+        """
+        raw = self.drive.imu_device.yaw      # re-read: notifications rebind this
+        return ((float(raw) / 10.0) + 180.0) % 360.0 - 180.0
+
+    def reset_heading(self):
+        """Define the current direction as heading zero."""
+        self.drive.imu_reset_yaw_axis(0)
 
     def stop(self, straighten=True):
         try:

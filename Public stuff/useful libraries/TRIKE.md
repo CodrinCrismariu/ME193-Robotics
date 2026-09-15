@@ -199,16 +199,36 @@ v_right = ω·(R + W/2) = v·(1 + W·tan(δ) / 2L)
 ```
 
 Written that way, `R` never has to be computed and there is no singularity at
-δ = 0. For this robot `W/2L = 70/170 = 0.412`:
+δ = 0. For this robot `W/2L = 86/160 = 0.537`:
 
 | Steer | v_left | v_right | Turn radius |
 | --- | --- | --- | --- |
 | 0° | 50.0 | 50.0 | straight |
-| 10° | 46.4 | 53.6 | 482 mm |
-| 20° | 42.5 | 57.5 | 234 mm |
-| 30° | 38.1 | 61.9 | 147 mm |
-| 45° | 29.4 | 70.6 | 85 mm |
-| 60° | 14.3 | 85.7 | 49 mm |
+| 10° | 45.3 | 54.7 | 454 mm |
+| 20° | 40.2 | 59.8 | 220 mm |
+| 30° | 34.5 | 65.5 | 139 mm |
+| 45° | 23.1 | 76.9 | 80 mm |
+| 60° | 3.5 | 96.5 | 46 mm |
+
+### The geared drive
+
+The drive motor is geared up: a **36-tooth black double-bevel gear** on the
+motor drives a **20-tooth tan** one on each wheel axle, so the wheels turn
+**36/20 = 1.8× faster** than the motor.
+
+This deliberately does **not** appear in the formula above. Both drive wheels
+share identical gearing, so the ratio scales `v_left` and `v_right` equally,
+and the no-slip condition constrains only the ratio *between* them. The gearing
+buys ground speed and changes odometry; it does not change the kinematics.
+
+What the gears *did* change is the geometry around them. The pair pushed the
+drive wheels 16 mm apart (two 1-stud-wide gears) and the rebuild brought the
+steered wheel in to 80 mm, so `W/2L` went from 0.412 to 0.537 — the two drive
+wheels now differ by roughly 30% more at the same steering angle, and every
+turn radius tightened.
+
+One consequence to watch: a single external gear mesh **reverses** rotation,
+which is why `DRIVE_SIGN` flipped from −1 to +1.
 
 ### Details that matter
 
@@ -229,9 +249,10 @@ blocks.
 **Absolute positioning for steering.** Straight ahead is encoder position 98, a
 fixed value that survives power cycles — no re-zeroing at startup.
 
-**60° is geometrically valid but practically bad.** The turn radius there (49 mm)
-is smaller than the drive wheels (62 mm), and the inner wheel barely creeps. Both
-GUIs cap steering at 45°.
+**60° is geometrically valid but practically bad.** The turn radius there (46 mm)
+is smaller than the drive wheels (62 mm), and the inner wheel barely creeps — at
+the new `W/2L` it drops to 3.5% while the outer runs at 96.5%, so the inside of
+the robot is nearly pivoting. Both GUIs cap steering at 45°.
 
 ### Command rate and latency
 
@@ -282,13 +303,14 @@ In `trike.py`. Redo these if the robot is rebuilt.
 
 | Constant | Value | How it was found |
 | --- | --- | --- |
-| `TRACK_MM` | 70 | measured between drive wheel centres |
-| `WHEELBASE_MM` | 85 | measured, drive axle to steered wheel |
+| `TRACK_MM` | 86 | measured between drive wheel centres |
+| `WHEELBASE_MM` | 80 | measured, drive axle to steered wheel |
 | `DRIVE_WHEEL_DIA_MM` | 62 | measured (unused by the kinematics) |
+| `DRIVE_GEAR_RATIO` | 1.8 | 36T black on the motor → 20T tan on the wheel |
 | `STEER_CENTER_ABS` | 98 | `read_abs.py` with the wheel straight |
 | `STEER_GEAR_RATIO` | 1.0 | `steer_test.py`; positive = left |
-| `DRIVE_SIGN` | -1 | drive motor's positive direction is reversed |
-| `SWAP_DRIVE_WHEELS` | True | because the reversal also mirrors left/right |
+| `DRIVE_SIGN` | +1 | one gear mesh reverses rotation — **verify on first run** |
+| `SWAP_DRIVE_WHEELS` | True | port mapping; gears don't change which side is which |
 
 ### Recalibrating the steering centre
 
