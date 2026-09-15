@@ -9,10 +9,10 @@ over Bluetooth.
 
 ---
 
-## Use `hand_control_mac.py`, not `hand_control.py`
+## Camera handling is built into `hand_control.py`
 
-`hand_control.py` opens the camera with `cv2.CAP_DSHOW` — DirectShow, which is
-Windows-only. On macOS it can never open, and the script dies with:
+`hand_control.py` used to open the camera with `cv2.CAP_DSHOW` — DirectShow,
+which is Windows-only. On macOS it could never open, and the script died with:
 
 ```
 cannot open camera 0
@@ -20,18 +20,22 @@ Future exception was never retrieved
 ConnectionError: Device disconnected unexpectedly
 ```
 
-The second error is a knock-on effect: the `raise SystemExit` for the camera
-happens *before* the `try`/`finally` that disconnects the motors, so the robot is
-left connected and live when the script bails.
+The second error was a knock-on effect: the `raise SystemExit` for the camera
+happened *before* the `try`/`finally` that disconnects the motors, so the robot
+was left connected and live when the script bailed.
 
-`hand_control_mac.py` fixes three Windows assumptions and is otherwise identical
-— same controls, same kinematics:
+Those three Windows assumptions are now fixed in `hand_control.py` itself,
+guarded per platform, so one script runs everywhere:
 
-| Assumption | What the mac variant does |
+| Assumption | What it does now |
 | --- | --- |
 | `CAP_DSHOW` backend | picks the backend per platform (`CAP_ANY` off Windows) |
 | camera index `0` is built-in | selects the built-in camera by *device type* |
 | camera failure exits uncleanly | disconnects the motors on that path |
+
+`hand_control_mac.py` is kept as a one-line shim that calls into
+`hand_control.py`, so the commands below still work either way. Prefer
+`hand_control.py` in anything new.
 
 ---
 
@@ -122,7 +126,7 @@ index 2: <name>'s iPhone Desk View Camera
 ```
 
 The order is not guaranteed and changes as the phone connects and disconnects,
-so a hardcoded `0` is not dependably the Mac's own camera. `hand_control_mac.py`
+so a hardcoded `0` is not dependably the Mac's own camera. `hand_control.py`
 picks the built-in one by device type instead. Override with `--camera N`.
 
 ---

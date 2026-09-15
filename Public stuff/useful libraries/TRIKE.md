@@ -16,8 +16,8 @@ are the numbers to redo.
 | --- | --- |
 | `trike.py` | The core library: kinematics, steering, motor connection |
 | `robot_ui.py` | Pop-up control panel (keyboard + mouse) |
-| `hand_control.py` | Webcam hand control |
-| `hand_control_mac.py` | Webcam hand control, macOS variant |
+| `hand_control.py` | Webcam hand control (Windows, macOS, Linux) |
+| `hand_control_mac.py` | Shim kept for compatibility — calls `hand_control.py` |
 | `hand_landmarker.task` | MediaPipe hand model — **not in git**, [download it](#install) |
 | `lelib.py` | Class-wide wrapper around `legoeducation` |
 | `scan_tmp.py` | Lists every LEGO device in Bluetooth range with its card |
@@ -149,9 +149,10 @@ python hand_control.py --no-robot  # camera only, nothing moves
 python hand_control.py --camera 1  # a different webcam
 ```
 
-On macOS use `hand_control_mac.py`, which carries the platform fixes described
-below; `hand_control.py` opens the camera with a Windows-only backend and will
-fail with "cannot open camera 0".
+`hand_control.py` runs on Windows, macOS and Linux — it picks the capture
+backend per platform and, on macOS, finds the built-in camera by device type.
+See [mac.md](mac.md) for the macOS specifics (camera permissions, the
+MediaPipe version pin, Continuity Camera).
 
 In the macOS variant, with no `--camera` the built-in camera is selected by
 device type rather than by index. Continuity Camera makes a nearby iPhone appear

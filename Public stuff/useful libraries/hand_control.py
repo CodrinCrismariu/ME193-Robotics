@@ -3,6 +3,12 @@ Drive the tricycle robot with your hand in front of the webcam.
 
     python hand_control.py                # drive the robot
     python hand_control.py --no-robot     # camera only, for trying it out
+    python hand_control.py --camera 1     # a specific capture device
+
+Runs on Windows, macOS and Linux: the capture backend is chosen per platform
+(DirectShow is Windows-only), and on macOS the built-in camera is selected by
+device type, since Continuity Camera adds a nearby iPhone as an extra device
+and shifts the index order.
 
 Hold one hand up to the camera. Relative to the centre of the frame:
 
@@ -23,6 +29,7 @@ quitting, or any error.
 
 import argparse
 import math
+import sys
 import time
 
 import cv2
@@ -99,10 +106,43 @@ def draw_hud(frame, cx, cy, hand_xy, speed, steer, armed, connected):
                 (24, h - 56), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (230, 230, 230), 1)
 
 
+def _builtin_camera_index():
+    """OpenCV index of the Mac's built-in camera, or None if it can't be found.
+
+    Continuity Camera makes a nearby iPhone appear as an extra capture device,
+    and the index order is not guaranteed, so pick the built-in camera by device
+    type instead of trusting index 0. Returns None off macOS or when the
+    optional pyobjc AVFoundation bridge is absent -- callers fall back to 0.
+    """
+    if sys.platform != "darwin":
+        return None
+    try:
+        import AVFoundation as AV
+    except ImportError:
+        return None
+    names = ("AVCaptureDeviceTypeBuiltInWideAngleCamera",
+             "AVCaptureDeviceTypeExternal",
+             "AVCaptureDeviceTypeContinuityCamera",
+             "AVCaptureDeviceTypeDeskViewCamera")
+    types = [t for t in (getattr(AV, n, None) for n in names) if t]
+    try:
+        session = (AV.AVCaptureDeviceDiscoverySession
+                   .discoverySessionWithDeviceTypes_mediaType_position_(
+                       types, AV.AVMediaTypeVideo,
+                       AV.AVCaptureDevicePositionUnspecified))
+        for i, dev in enumerate(session.devices()):
+            if dev.deviceType() == AV.AVCaptureDeviceTypeBuiltInWideAngleCamera:
+                return i
+    except Exception:
+        return None
+    return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-robot", action="store_true", help="camera only")
-    ap.add_argument("--camera", type=int, default=0)
+    ap.add_argument("--camera", type=int, default=None,
+                    help="camera index (default: the built-in camera)")
     args = ap.parse_args()
 
     bot = None
@@ -119,9 +159,26 @@ def main():
             say("continuing with the camera only -- the HUD will say 'offline'.")
             bot = None
 
-    cap = cv2.VideoCapture(args.camera, cv2.CAP_DSHOW)
+    # CAP_DSHOW is DirectShow -- Windows only. On macOS/Linux it never opens, so
+    # use OpenCV's default backend there (AVFoundation / V4L2).
+    backend = cv2.CAP_DSHOW if sys.platform == "win32" else cv2.CAP_ANY
+    index = args.camera
+    if index is None:
+        index = _builtin_camera_index()
+        if index is None:
+            index = 0
+    cap = cv2.VideoCapture(index, backend)
     if not cap.isOpened():
-        raise SystemExit("cannot open camera {}".format(args.camera))
+        # The robot is already connected by this point; without this the motors
+        # are left live and the dropped link surfaces as a stray
+        # "Device disconnected unexpectedly" future.
+        if bot is not None:
+            try:
+                bot.stop()
+                bot.disconnect()
+            except Exception:
+                pass
+        raise SystemExit("cannot open camera {}".format(index))
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 960)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 540)
 
