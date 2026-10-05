@@ -1,4 +1,5 @@
-# Sync Public stuff and Codrin's Projects; keep local environments excluded.
+# This repo only syncs the "Public stuff" folder.
+# Everything else in this working directory is ignored on purpose.
 *
 !.gitignore
 !README.md
@@ -26,25 +27,4 @@
 
 # MediaPipe hand model (7.8 MB binary) -- download it with the curl command
 # in "Public stuff/useful libraries/TRIKE.md"
-**/hand_landmarker.task
-# Throwaway venv created by virtualTesting/setup_test_env.py, ignored even
-# inside "Public stuff"
-Public stuff/virtualTesting/test/
-
-
-# Include project source folders.
-!Codrin's Projects/
-!Codrin's Projects/**
-
-# Generated environments and caches remain local.
-**/.venv/
-**/venv/
-**/env/
-**/__pycache__/
-**/*.py[cod]
-**/node_modules/
-**/.pytest_cache/
-**/.mypy_cache/
-**/.ruff_cache/
-**/*.egg-info/
 **/hand_landmarker.task

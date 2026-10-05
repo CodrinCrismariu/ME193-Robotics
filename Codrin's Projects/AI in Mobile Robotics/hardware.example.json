@@ -1,0 +1,34 @@
+{
+  "_comment": [
+    "Copy this file to hardware.json and edit it to match your kit.",
+    "hardware.json is gitignored: Connection Card colors and serials are",
+    "specific to the physical hardware in front of you.",
+    "Each device has its own card. Read the color and the serial number off",
+    "the Connection Card that came with it.",
+    "kind:        single_motor | double_motor | color_sensor | controller",
+    "card_color:  green | blue | red | orange | yellow | azure | purple | magenta",
+    "card_serial: the digits printed on the card, as a string"
+  ],
+  "devices": {
+    "drive": {
+      "kind": "double_motor",
+      "card_color": "azure",
+      "card_serial": "3683"
+    },
+    "arm": {
+      "kind": "single_motor",
+      "card_color": "green",
+      "card_serial": "0000"
+    },
+    "eye": {
+      "kind": "color_sensor",
+      "card_color": "red",
+      "card_serial": "0000"
+    },
+    "levers": {
+      "kind": "controller",
+      "card_color": "yellow",
+      "card_serial": "0000"
+    }
+  }
+}

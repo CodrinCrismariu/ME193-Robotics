@@ -1,0 +1,27 @@
+# Vendored upstream documentation (fetched by scripts/sync_lego_docs.py)
+reference/LEGOEducation/
+
+# Local hardware configuration (Connection Card colors + serials are per-kit)
+hardware.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Editors / OS
+.vscode/*
+!.vscode/settings.json
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Claude Code local state
+.claude/settings.local.json
