@@ -28,3 +28,16 @@
 # MediaPipe hand model (7.8 MB binary) -- download it with the curl command
 # in "Public stuff/useful libraries/TRIKE.md"
 **/hand_landmarker.task
+# Throwaway venv created by virtualTesting/setup_test_env.py, ignored even
+# inside "Public stuff"
+Public stuff/virtualTesting/test/
+
+# Sync only the MQTT controller within Codrin's otherwise local projects.
+!Codrin's Projects/
+Codrin's Projects/*
+!Codrin's Projects/MQTT Robot Control/
+Codrin's Projects/MQTT Robot Control/*
+!Codrin's Projects/MQTT Robot Control/robot_control.py
+!Codrin's Projects/MQTT Robot Control/requirements.txt
+!Codrin's Projects/MQTT Robot Control/README.md
+!Codrin's Projects/MQTT Robot Control/Start Robot Control.bat
