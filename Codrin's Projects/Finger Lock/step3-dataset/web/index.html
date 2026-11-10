@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign Dataset Collector</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Sign dataset collector <small>C · O · D · R · I · N · none</small></h1>
+  <a class="navlink" href="label.html" target="labeler">Box labeler →</a>
+  <span id="status" class="status">Starting camera…</span>
+</header>
+
+<main>
+  <section class="stage">
+    <div class="viewwrap" id="viewwrap">
+      <canvas id="view" width="640" height="480"></canvas>
+      <div id="countdown" class="countdown" hidden></div>
+    </div>
+    <div class="readout">
+      <span id="sessionInfo"></span>
+      <span id="fps"></span>
+    </div>
+    <div class="hintbox">
+      <b id="hintTitle">C</b>
+      <span id="hintText"></span>
+    </div>
+  </section>
+
+  <aside class="panel">
+    <div class="group">
+      <h2><span>1</span> Camera</h2>
+      <select id="camera" aria-label="Camera"></select>
+      <div class="row">
+        <label><input type="checkbox" id="mirror" checked> Mirror the view</label>
+        <button id="lockExp" type="button">Lock exposure</button>
+      </div>
+      <p id="camNote" class="note">Pick the USB webcam, not the laptop's built-in camera.</p>
+    </div>
+
+    <div class="group">
+      <h2><span>2</span> Label</h2>
+      <div id="labels" class="labels"></div>
+    </div>
+
+    <div class="group">
+      <h2><span>3</span> Capture</h2>
+      <div class="row">
+        <button id="shot" class="primary" type="button">Capture <kbd>Space</kbd></button>
+        <button id="burst" type="button">Burst <kbd>B</kbd></button>
+        <label class="num">frames <input type="number" id="burstN" value="20" min="2" max="60"></label>
+      </div>
+      <div class="row">
+        <button id="undo" type="button">Undo last <kbd>Z</kbd></button>
+        <button id="newSession" type="button">New session</button>
+      </div>
+      <p class="note">Keys: <kbd>C</kbd> <kbd>O</kbd> <kbd>D</kbd> <kbd>R</kbd> <kbd>I</kbd> <kbd>N</kbd> pick a letter, <kbd>X</kbd> picks none. A burst counts down 3-2-1, then takes a photo every quarter second: move your hand a little while it runs.</p>
+    </div>
+  </aside>
+</main>
+
+<section class="gallery">
+  <div class="gbar">
+    <h2>Captured</h2>
+    <select id="filter" aria-label="Show label"></select>
+    <span id="total" class="note"></span>
+    <span class="note">Click a photo to open it in the box labeler.</span>
+  </div>
+  <div id="grid" class="grid"></div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>

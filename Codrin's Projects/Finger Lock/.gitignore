@@ -1,0 +1,38 @@
+.venv/
+__pycache__/
+*.pyc
+~$*.xlsx
+.DS_Store
+Thumbs.db
+
+# downloaded / generated datasets (recreate with step2-cnn/prepare_data.py)
+step2-cnn/data/raw/
+step2-cnn/data/*.npz
+
+# Notion draft holds reflection answers: keep it off GitHub
+notion_page_draft.md
+
+# my own sign-language photos (personal data; recreate with step3-dataset/collect_server.py)
+step3-dataset/dataset/
+step3-dataset/figures/
+
+# hand tracker model, downloaded by step3-dataset/prelabel_boxes.py on first run
+step3-dataset/hand_landmarker.task
+
+# training logs and previews of training inputs (crops can show my face in background patches)
+step4-models/*.log
+step4-models/runs/*/training_inputs.png
+step4-models/runs/*/test_predictions.png
+
+# film pictures and the demo clip show my face and room (recreate with step4-models/analyze_model.py)
+movie2/assets/*.png
+movie2/assets/*.mp4
+movie2/assets/web/
+
+# the demo recording, my voice-over and the exported films (personal media, large)
+/*.mp4
+/*.mp3
+movie2/notion_images/
+
+# the Notion page source (pasted into Notion; the reflection lives there, not on GitHub)
+notion_page.md

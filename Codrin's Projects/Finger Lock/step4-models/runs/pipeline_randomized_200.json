@@ -1,0 +1,17 @@
+{
+ "classifier": "randomized_200",
+ "detector": "detector",
+ "n_test_frames": 370,
+ "end_to_end": 0.8945946097373962,
+ "with_labeled_boxes": 0.8999999761581421,
+ "per_label_end_to_end": {
+  "C": 0.8500000238418579,
+  "O": 0.8999999761581421,
+  "D": 1.0,
+  "R": 0.8333333134651184,
+  "I": 0.9833333492279053,
+  "N": 0.9399999976158142,
+  "none": 0.8333333134651184
+ },
+ "frames_detector_said_no_hand": 18
+}

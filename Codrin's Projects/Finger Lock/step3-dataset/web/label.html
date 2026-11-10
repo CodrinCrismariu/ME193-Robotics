@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hand Box Labeler</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Hand box labeler <small id="progress"></small></h1>
+  <a class="navlink" href="index.html">← Collector</a>
+  <span id="status" class="status">Loading…</span>
+</header>
+
+<main>
+  <section class="stage">
+    <div class="viewwrap">
+      <canvas id="canvas" width="640" height="480"></canvas>
+    </div>
+    <div class="readout">
+      <span id="where"></span>
+      <span id="info"></span>
+    </div>
+    <div class="hintbox">
+      <b id="labelBig">–</b>
+      <span>Drag on the photo to draw the box around the hand: from the fingertips to the wrist, leaving out the forearm. Press <kbd>Enter</kbd> to confirm it and go to the next photo.</span>
+    </div>
+  </section>
+
+  <aside class="panel">
+    <div class="group">
+      <h2><span>1</span> Which photos</h2>
+      <select id="filter" aria-label="Which photos">
+        <option value="todo">Not checked yet</option>
+        <option value="all">All photos</option>
+        <option value="nobox">Letters with no box</option>
+        <option value="C">C</option><option value="O">O</option><option value="D">D</option>
+        <option value="R">R</option><option value="I">I</option><option value="N">N</option>
+        <option value="none">none</option>
+      </select>
+      <label class="slider" style="margin-top:10px">Go to <input type="range" id="scrub" min="0" max="0" value="0"></label>
+    </div>
+
+    <div class="group">
+      <h2><span>2</span> Box</h2>
+      <div class="row">
+        <button id="confirm" class="primary" type="button">Confirm box <kbd>Enter</kbd></button>
+        <button id="nohand" type="button">No hand <kbd>H</kbd></button>
+      </div>
+      <div class="row">
+        <button id="undoBox" type="button">Undo drawing <kbd>U</kbd></button>
+        <button id="del" class="danger" type="button">Delete photo <kbd>Del</kbd></button>
+      </div>
+    </div>
+
+    <div class="group">
+      <h2><span>3</span> Move</h2>
+      <div class="row">
+        <button id="prev" type="button">← Previous <kbd>A</kbd></button>
+        <button id="next" type="button">Next <kbd>D</kbd> →</button>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="mirror" checked> Mirror the view</label>
+      </div>
+      <p class="note">Previous and Next move without saving. Arrow keys work too.</p>
+    </div>
+  </aside>
+</main>
+
+<script src="label.js"></script>
+</body>
+</html>
