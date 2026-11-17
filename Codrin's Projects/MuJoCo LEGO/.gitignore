@@ -1,0 +1,13 @@
+# Keep credentials, environments, and newly generated runs local.
+.env
+.env.*
+!.env.example
+hpc/config.sh
+hpc/scripts/
+hpc/setup.py
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+hpc/runs/
+hpc/logs/

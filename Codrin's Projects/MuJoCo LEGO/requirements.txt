@@ -1,0 +1,3 @@
+legoeducation==1.2.0
+numpy>=1.26
+onnxruntime>=1.20

@@ -1,0 +1,18 @@
+{
+  "task": "Beam-Drive-Straight",
+  "history": 10,
+  "observation_size": 160,
+  "action_scale": 21.0,
+  "control_dt": 0.02,
+  "terms": [
+    "gyro",
+    "accel",
+    "heading",
+    "encoder_angles",
+    "encoder_speeds",
+    "last_action"
+  ],
+  "history_order": "term-major-oldest-first",
+  "checkpoint": "model_299.pt",
+  "beam_task_sha256": "fb8824095f7482a068a631566ef02f16785ee60a69c08a48827666932723806f"
+}

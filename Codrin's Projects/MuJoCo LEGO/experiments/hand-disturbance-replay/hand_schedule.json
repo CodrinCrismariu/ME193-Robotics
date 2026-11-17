@@ -1,0 +1,20 @@
+{
+  "source_video": "policy on real.MOV",
+  "duration_s": 20.0,
+  "policy_start_s": 3.8,
+  "seed": 42,
+  "method": "Hand-contact timing visually estimated from source frames. World-frame wrench amplitudes and directions are illustrative estimates, not measured forces or a fitted physical validation.",
+  "contacts": [
+    {"id": "Hand contact 1", "start_s": 8.48, "end_s": 9.32},
+    {"id": "Hand contact 2", "start_s": 11.90, "end_s": 12.48},
+    {"id": "Hand contact 3", "start_s": 14.60, "end_s": 15.64},
+    {"id": "Hand contact 4", "start_s": 18.96, "end_s": 19.68}
+  ],
+  "wrenches": [
+    {"contact": "Hand contact 1", "start_s": 8.48, "end_s": 9.32, "force_world_N": [0.0, 0.25, 0.0], "torque_world_Nm": [0.0, 0.0, -0.0035]},
+    {"contact": "Hand contact 2", "start_s": 11.90, "end_s": 12.48, "force_world_N": [0.0, -0.30, 0.0], "torque_world_Nm": [0.0, 0.0, 0.004]},
+    {"contact": "Hand contact 3", "start_s": 14.60, "end_s": 15.02, "force_world_N": [0.15, 0.25, 0.0], "torque_world_Nm": [0.0, 0.0, -0.003]},
+    {"contact": "Hand contact 3", "start_s": 15.02, "end_s": 15.64, "force_world_N": [0.0, -0.20, 0.0], "torque_world_Nm": [0.0, 0.0, 0.003]},
+    {"contact": "Hand contact 4", "start_s": 18.96, "end_s": 19.68, "force_world_N": [-0.20, -0.20, 0.0], "torque_world_Nm": [0.0, 0.0, 0.004]}
+  ]
+}

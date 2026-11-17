@@ -1,0 +1,219 @@
+Warp 1.14.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.9
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA A100-PCIE-40GB" (39 GiB, sm_80, mempool enabled)
+   Kernel cache:
+     /cluster/tufts/c26fa1me0193/ccrism01/.cache/warp/1.14.0
+Module mujoco_warp._src.smooth e597d07 load on device 'cuda:0' took 18.91 ms  (cached)
+Module _nxn_broadphase__locals__kernel_df6640ed df6640e load on device 'cuda:0' took 10.65 ms  (cached)
+Module ccd_kernel_builder__locals__ccd_kernel_433934c2 433934c load on device 'cuda:0' took 13.93 ms  (cached)
+Module ccd_kernel_builder__locals__ccd_kernel_433934c2 62e8807 load on device 'cuda:0' took 10.34 ms  (cached)
+Module _primitive_narrowphase__locals__primitive_narrowphase_a0b10ade a0b10ad load on device 'cuda:0' took 10.41 ms  (cached)
+Module mujoco_warp._src.constraint 880bd7f load on device 'cuda:0' took 8.99 ms  (cached)
+Module _friction_dof__locals__kernel_3c14efda 3c14efd load on device 'cuda:0' took 12.04 ms  (cached)
+Module _efc_contact_init__locals__kernel_07a590e0 07a590e load on device 'cuda:0' took 11.36 ms  (cached)
+Module _efc_contact_jac_dense__locals__kernel_5e1af9f9 1d73624 load on device 'cuda:0' took 12.01 ms  (cached)
+Module _efc_contact_update__locals__kernel_8aad7bfd 8aad7bf load on device 'cuda:0' took 11.67 ms  (cached)
+Module mujoco_warp._src.forward 687ddb7 load on device 'cuda:0' took 10.34 ms  (cached)
+Module mujoco_warp._src.passive 8ff6993 load on device 'cuda:0' took 13.77 ms  (cached)
+Module mujoco_warp._src.sensor 42e0a24 load on device 'cuda:0' took 18.22 ms  (cached)
+Module mujoco_warp._src.forward 2190340 load on device 'cuda:0' took 13.73 ms  (cached)
+Module _qfrc_smooth__locals__kernel_6eb3d958 6eb3d95 load on device 'cuda:0' took 14.67 ms  (cached)
+Module mujoco_warp._src.support d1e71d9 load on device 'cuda:0' took 13.78 ms  (cached)
+Module _tile_cholesky_factorize_solve_block__locals__kernel_96fe77a4 b3c84d4 load on device 'cuda:0' took 61.81 ms  (cached)
+Module _solve_init_dof__locals__kernel_99a497d1 99a497d load on device 'cuda:0' took 13.16 ms  (cached)
+Module mujoco_warp._src.solver 245b5b3 load on device 'cuda:0' took 15.34 ms  (cached)
+Module _solve_init_jaref_kernel__locals__kernel_441f2857 441f285 load on device 'cuda:0' took 13.87 ms  (cached)
+Module mul_m_kernel__locals___mul_m_fd2186c4 fd2186c load on device 'cuda:0' took 16.11 ms  (cached)
+Module _update_constraint_efc__locals__kernel_4af8f110 4af8f11 load on device 'cuda:0' took 13.92 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_dense__locals__kernel_391cb5b4 391cb5b load on device 'cuda:0' took 13.62 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_cb780630 cb78063 load on device 'cuda:0' took 14.73 ms  (cached)
+Module _update_gradient_grad__locals__kernel_0cbf4927 0cbf492 load on device 'cuda:0' took 14.74 ms  (cached)
+Module _update_gradient_JTDAJ_dense_tiled__locals__kernel_4a3538de e1317f2 load on device 'cuda:0' took 15.41 ms  (cached)
+Module _update_gradient_cholesky__locals__kernel_72d6533b 9874e5a load on device 'cuda:0' took 57.99 ms  (cached)
+Module _linesearch_iterative_kernel__locals__kernel_fb5b8694 726f286 load on device 'cuda:0' took 10.22 ms  (cached)
+Module _update_constraint_efc__locals__kernel_e30beb1f e30beb1 load on device 'cuda:0' took 13.50 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_dense__locals__kernel_5ba72bac 5ba72ba load on device 'cuda:0' took 9.31 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_f708ee5f f708ee5 load on device 'cuda:0' took 7.32 ms  (cached)
+Module _update_gradient_grad__locals__kernel_cb93df65 cb93df6 load on device 'cuda:0' took 9.35 ms  (cached)
+Module _update_gradient_cholesky__locals__kernel_dfa18736 66fe7ce load on device 'cuda:0' took 52.57 ms  (cached)
+Module mujoco_warp._src.derivative e770e28 load on device 'cuda:0' took 11.54 ms  (cached)
+Module _next_time_builder__locals___next_time_95ad6d7a 95ad6d7 load on device 'cuda:0' took 8.09 ms  (cached)
+Module reset_data__locals__reset_xfrc_applied_03030511 0303051 load on device 'cuda:0' took 8.40 ms  (cached)
+Module reset_data__locals__reset_M_631075dd 631075d load on device 'cuda:0' took 7.32 ms  (cached)
+Module reset_data__locals__reset_mocap_6513201c 6513201 load on device 'cuda:0' took 7.49 ms  (cached)
+Module reset_data__locals__reset_contact_5c08f689 5c08f68 load on device 'cuda:0' took 7.74 ms  (cached)
+Module reset_data__locals__reset_sleep_50b990da 50b990d load on device 'cuda:0' took 7.49 ms  (cached)
+Module reset_data__locals__reset_nworld_69a10925 69a1092 load on device 'cuda:0' took 8.30 ms  (cached)
+
++---------------------------------+
+|         Base Environment        |
++------------------------+--------+
+| Property               | Value  |
++------------------------+--------+
+| Number of environments | 1      |
+| Environment device     | cuda:0 |
+| Environment seed       | None   |
+| Physics step-size      | 0.002  |
+| Environment step-size  | 0.02   |
++------------------------+--------+
+
+[INFO] <EventManager> contains 3 active terms.
++-------------------------------------+
+| Active Event Terms in Mode: 'reset' |
++----------+--------------------------+
+|  Index   | Name                     |
++----------+--------------------------+
+|    0     | reset_pose               |
+|    1     | sensor_errors            |
+|    2     | motor_gains              |
+|    3     | motor_torque             |
+|    4     | beam_friction            |
+|    5     | case_friction            |
++----------+--------------------------+
++------------------------------------+
+| Active Event Terms in Mode: 'step' |
++----------+-------------------------+
+|  Index   | Name                    |
++----------+-------------------------+
+|    0     | heading_drift           |
+|    1     | push                    |
++----------+-------------------------+
++---------------------------------------+
+| Active Event Terms in Mode: 'startup' |
++-------------+-------------------------+
+|    Index    | Name                    |
++-------------+-------------------------+
+|      0      | motor_mass              |
+|      1      | beam_mass               |
++-------------+-------------------------+
++-----------------------------+
+| Domain Randomization Fields |
++-------+---------------------+
+| Index | Field Name          |
++-------+---------------------+
+|   0   | body_mass           |
+|   1   | body_ipos           |
+|   2   | body_inertia        |
+|   3   | body_iquat          |
+|   4   | body_subtreemass    |
+|   5   | dof_invweight0      |
+|   6   | body_invweight0     |
+|   7   | tendon_length0      |
+|   8   | tendon_invweight0   |
+|   9   | actuator_acc0       |
+|   10  | actuator_gainprm    |
+|   11  | actuator_biasprm    |
+|   12  | actuator_forcerange |
+|   13  | jnt_actfrcrange     |
+|   14  | tendon_actfrcrange  |
+|   15  | geom_friction       |
++-------+---------------------+
+
+[INFO] <NullCommandManager> (inactive)
+[INFO] <ActionManager> contains 1 active terms.
++--------------------------------+
+| Active Action Terms (shape: 2) |
++--------+--------+--------------+
+| Index  | Name   |    Dimension |
++--------+--------+--------------+
+|   0    | beams  |            2 |
++--------+--------+--------------+
+
+[INFO] <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'actor' (shape: (160,)) |
++---------+----------------------+---------------------------+
+|  Index  | Name                 |           Shape           |
++---------+----------------------+---------------------------+
+|    0    | gyro                 |      (30,)  ← 10×(3,)     |
+|    1    | accel                |      (30,)  ← 10×(3,)     |
+|    2    | heading              |      (20,)  ← 10×(2,)     |
+|    3    | encoder_angles       |      (40,)  ← 10×(4,)     |
+|    4    | encoder_speeds       |      (20,)  ← 10×(2,)     |
+|    5    | last_action          |      (20,)  ← 10×(2,)     |
++---------+----------------------+---------------------------+
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (22,)) |
++------------+--------------------------------+--------------+
+|   Index    | Name                           |    Shape     |
++------------+--------------------------------+--------------+
+|     0      | velocity                       |     (6,)     |
+|     1      | gravity                        |     (3,)     |
+|     2      | heading_offset                 |     (4,)     |
+|     3      | beam_angles                    |     (4,)     |
+|     4      | beam_vel                       |     (2,)     |
+|     5      | last_action                    |     (2,)     |
+|     6      | average_speed                  |     (1,)     |
++------------+--------------------------------+--------------+
+
+[INFO] <TerminationManager> contains 3 active terms.
++-----------------------------+
+|   Active Termination Terms  |
++-------+----------+----------+
+| Index | Name     | Time Out |
++-------+----------+----------+
+|   0   | time_out |   True   |
+|   1   | off_line |  False   |
+|   2   | on_end   |  False   |
++-------+----------+----------+
+
+[INFO] <RewardManager> contains 6 active terms.
++--------------------------------+
+|      Active Reward Terms       |
++-------+---------------+--------+
+| Index | Name          | Weight |
++-------+---------------+--------+
+|   0   | forward_speed |    2.0 |
+|   1   | stay_on_line  |   0.25 |
+|   2   | face_forward  |    0.5 |
+|   3   | action_rate   |  -0.02 |
+|   4   | shaft_level   |    2.0 |
+|   5   | fell          |  -25.0 |
++-------+---------------+--------+
+
+[INFO] <NullCurriculumManager> (inactive)
+[INFO] <NullMetricsManager> (inactive)
+[INFO] <NullRecorderManager> (inactive)
+Module mujoco_warp._src.io 19274fb load on device 'cuda:0' took 14.49 ms  (cached)
+Module _tile_cholesky_factorize_block__locals__kernel_367c97bd 2c482c8 load on device 'cuda:0' took 40.63 ms  (cached)
+Module _tile_cholesky_solve_block__locals__kernel_ae7dc82c dfd09c6 load on device 'cuda:0' took 47.92 ms  (cached)
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=160, out_features=128, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=128, out_features=128, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=128, out_features=2, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=22, out_features=128, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=128, out_features=128, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+  second   x (m)   y (m)   heading (deg)   speed (m/s)
+      1     0.17   -0.03        -14.8          0.27
+      2     0.05    0.01         19.3          0.38
+      3     0.35    0.01         -3.8          0.31
+      4     0.59   -0.03         -1.1          0.04
+      5     0.82   -0.03         17.6          0.12
+      6     1.10   -0.01         18.7          0.44
+      7     1.35   -0.07         11.1          0.29
+      8     1.56   -0.03         34.8          0.17
+      9     1.80   -0.05         -1.0          0.08
+     10     1.94   -0.08          8.7          0.25
+wrote the video (an .mp4 next to this script)

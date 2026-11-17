@@ -1,0 +1,99 @@
+<!-- Written by build_beam_robot.py from robot.xml (the Onshape export). Do not edit: change the script. -->
+<mujoco model="beam_scene">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <asset>
+    <mesh name="motor" file="body.stl"/>
+    <mesh name="left_beam_visual" file="left_beam_visual.stl"/>
+    <mesh name="left_beam_collision_0" file="left_beam_collision_0.stl"/>
+    <mesh name="left_beam_collision_1" file="left_beam_collision_1.stl"/>
+    <mesh name="left_beam_collision_2" file="left_beam_collision_2.stl"/>
+    <mesh name="left_beam_collision_3" file="left_beam_collision_3.stl"/>
+    <mesh name="left_beam_collision_4" file="left_beam_collision_4.stl"/>
+    <mesh name="left_beam_collision_5" file="left_beam_collision_5.stl"/>
+    <mesh name="left_beam_collision_6" file="left_beam_collision_6.stl"/>
+    <mesh name="left_beam_collision_7" file="left_beam_collision_7.stl"/>
+    <mesh name="left_beam_collision_8" file="left_beam_collision_8.stl"/>
+    <mesh name="left_beam_collision_9" file="left_beam_collision_9.stl"/>
+    <mesh name="right_beam_visual" file="right_beam_visual.stl"/>
+    <mesh name="right_beam_collision_0" file="right_beam_collision_0.stl"/>
+    <mesh name="right_beam_collision_1" file="right_beam_collision_1.stl"/>
+    <mesh name="right_beam_collision_2" file="right_beam_collision_2.stl"/>
+    <mesh name="right_beam_collision_3" file="right_beam_collision_3.stl"/>
+    <mesh name="right_beam_collision_4" file="right_beam_collision_4.stl"/>
+    <mesh name="right_beam_collision_5" file="right_beam_collision_5.stl"/>
+    <mesh name="right_beam_collision_6" file="right_beam_collision_6.stl"/>
+    <mesh name="right_beam_collision_7" file="right_beam_collision_7.stl"/>
+    <mesh name="right_beam_collision_8" file="right_beam_collision_8.stl"/>
+    <mesh name="right_beam_collision_9" file="right_beam_collision_9.stl"/>
+  </asset>
+  <worldbody>
+    <body name="chassis" pos="0 0 0.017">
+      <freejoint/>
+      <geom name="motor_visual" type="mesh" mesh="motor" pos="-0.024 -2.37161e-11 0.0136" quat="0.707107 0 0 0.707107"
+            contype="0" conaffinity="0" density="0" group="2" rgba=".97 .53 0 1"/>
+      <geom name="motor_case" type="box" pos="-0.024 0 9.71231e-10" size="0.04 0.032 0.0152" mass="0.15"
+            friction="0.4 0.005 0.0001" priority="1" group="3"/>
+      <body name="left_beam" pos="-0 0.0395 0">
+        <joint name="left_beam" type="hinge" axis="0 -1 0" armature="0.0002" damping="0.001"/>
+        <inertial pos="0.0235407 -0.00307272 -0.00222022" mass="0.00446916534"
+                  fullinertia="1.23755e-07 1.64287e-06 1.62978e-06 -1.01801e-07 1.58357e-07 3.04891e-08"/>
+        <geom name="left_beam_visual" type="mesh" mesh="left_beam_visual"
+              contype="0" conaffinity="0" density="0" group="2" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam" type="mesh" mesh="left_beam_collision_0" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam_collision_1" type="mesh" mesh="left_beam_collision_1" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam_collision_2" type="mesh" mesh="left_beam_collision_2" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam_collision_3" type="mesh" mesh="left_beam_collision_3" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam_collision_4" type="mesh" mesh="left_beam_collision_4" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam_collision_5" type="mesh" mesh="left_beam_collision_5" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam_collision_6" type="mesh" mesh="left_beam_collision_6" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam_collision_7" type="mesh" mesh="left_beam_collision_7" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam_collision_8" type="mesh" mesh="left_beam_collision_8" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="left_beam_collision_9" type="mesh" mesh="left_beam_collision_9" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+      </body>
+      <body name="right_beam" pos="-0 -0.0394998 0">
+        <joint name="right_beam" type="hinge" axis="0 -1 0" armature="0.0002" damping="0.001"/>
+        <inertial pos="0.0241213 0.00308863 -0.00219546" mass="0.00451956549"
+                  fullinertia="1.24522e-07 1.71746e-06 1.70411e-06 1.04475e-07 1.62516e-07 -3.06471e-08"/>
+        <geom name="right_beam_visual" type="mesh" mesh="right_beam_visual"
+              contype="0" conaffinity="0" density="0" group="2" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam" type="mesh" mesh="right_beam_collision_0" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam_collision_1" type="mesh" mesh="right_beam_collision_1" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam_collision_2" type="mesh" mesh="right_beam_collision_2" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam_collision_3" type="mesh" mesh="right_beam_collision_3" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam_collision_4" type="mesh" mesh="right_beam_collision_4" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam_collision_5" type="mesh" mesh="right_beam_collision_5" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam_collision_6" type="mesh" mesh="right_beam_collision_6" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam_collision_7" type="mesh" mesh="right_beam_collision_7" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam_collision_8" type="mesh" mesh="right_beam_collision_8" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+        <geom name="right_beam_collision_9" type="mesh" mesh="right_beam_collision_9" density="0" group="3"
+              friction="0.8 0.005 0.0001" priority="1" rgba=".62 .81 .93 1"/>
+      </body>
+    </body>
+    <light pos="0 0 3" dir="0 0 -1" directional="true"/>
+    <geom name="floor" type="plane" size="0 0 0.05" rgba=".2 .3 .4 1"/>
+  </worldbody>
+  <option integrator="implicitfast"/>
+  <actuator>
+    <velocity name="left_beam" joint="left_beam" kv="0.05" forcerange="-0.1 0.1" ctrlrange="-10 10"/>
+    <velocity name="right_beam" joint="right_beam" kv="0.05" forcerange="-0.1 0.1" ctrlrange="-10 10"/>
+  </actuator>
+</mujoco>

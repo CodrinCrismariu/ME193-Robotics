@@ -1,0 +1,194 @@
+[
+  {
+    "body_axes": [
+      -2,
+      1,
+      3
+    ],
+    "motor_sign": [
+      1,
+      -1
+    ],
+    "gyro_rmse_rad_s": 0.3074474388948547
+  },
+  {
+    "body_axes": [
+      -1,
+      -2,
+      3
+    ],
+    "motor_sign": [
+      1,
+      -1
+    ],
+    "gyro_rmse_rad_s": 0.34765287233244696
+  },
+  {
+    "body_axes": [
+      1,
+      2,
+      3
+    ],
+    "motor_sign": [
+      1,
+      -1
+    ],
+    "gyro_rmse_rad_s": 0.3509002078470939
+  },
+  {
+    "body_axes": [
+      -1,
+      -2,
+      3
+    ],
+    "motor_sign": [
+      1,
+      1
+    ],
+    "gyro_rmse_rad_s": 0.3788434204908482
+  },
+  {
+    "body_axes": [
+      -2,
+      1,
+      3
+    ],
+    "motor_sign": [
+      1,
+      1
+    ],
+    "gyro_rmse_rad_s": 0.3788638190510664
+  },
+  {
+    "body_axes": [
+      2,
+      -1,
+      3
+    ],
+    "motor_sign": [
+      1,
+      1
+    ],
+    "gyro_rmse_rad_s": 0.37893077957768223
+  },
+  {
+    "body_axes": [
+      1,
+      2,
+      3
+    ],
+    "motor_sign": [
+      1,
+      1
+    ],
+    "gyro_rmse_rad_s": 0.3789511734354487
+  },
+  {
+    "body_axes": [
+      2,
+      -1,
+      3
+    ],
+    "motor_sign": [
+      1,
+      -1
+    ],
+    "gyro_rmse_rad_s": 0.3866129173024732
+  },
+  {
+    "body_axes": [
+      -2,
+      1,
+      3
+    ],
+    "motor_sign": [
+      -1,
+      -1
+    ],
+    "gyro_rmse_rad_s": 0.4741165577465533
+  },
+  {
+    "body_axes": [
+      2,
+      -1,
+      3
+    ],
+    "motor_sign": [
+      -1,
+      1
+    ],
+    "gyro_rmse_rad_s": 0.49872880298087374
+  },
+  {
+    "body_axes": [
+      -1,
+      -2,
+      3
+    ],
+    "motor_sign": [
+      -1,
+      -1
+    ],
+    "gyro_rmse_rad_s": 0.4993591150943691
+  },
+  {
+    "body_axes": [
+      1,
+      2,
+      3
+    ],
+    "motor_sign": [
+      -1,
+      1
+    ],
+    "gyro_rmse_rad_s": 0.5000418734259111
+  },
+  {
+    "body_axes": [
+      -1,
+      -2,
+      3
+    ],
+    "motor_sign": [
+      -1,
+      1
+    ],
+    "gyro_rmse_rad_s": 0.5005195694029774
+  },
+  {
+    "body_axes": [
+      1,
+      2,
+      3
+    ],
+    "motor_sign": [
+      -1,
+      -1
+    ],
+    "gyro_rmse_rad_s": 0.5008905074908495
+  },
+  {
+    "body_axes": [
+      -2,
+      1,
+      3
+    ],
+    "motor_sign": [
+      -1,
+      1
+    ],
+    "gyro_rmse_rad_s": 0.5018279541953613
+  },
+  {
+    "body_axes": [
+      2,
+      -1,
+      3
+    ],
+    "motor_sign": [
+      -1,
+      -1
+    ],
+    "gyro_rmse_rad_s": 0.5248469453019909
+  }
+]

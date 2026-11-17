@@ -1,0 +1,4 @@
+mujoco>=3.3
+numpy
+trimesh==5.2.1
+coacd==1.0.14

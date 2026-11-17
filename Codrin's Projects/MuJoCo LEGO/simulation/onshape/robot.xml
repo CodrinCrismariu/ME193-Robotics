@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape https://cad.onshape.com/documents/545a624e99b20e5906c78208/w/856cbcbda4816cce8e53fd89/e/a43c0e758162b219f5a2ce7e -->
+<mujoco model="onshape">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="onshape">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link body -->
+    <body name="body" pos="0 0 0" quat="1 0 0 0" childclass="onshape">
+      <freejoint name="body_freejoint"/>
+      <inertial pos="-0.0794972 -0.0274006 0.00360756" mass="0.000120305" fullinertia="1.05644e-07 2.5227e-08 1.28239e-07 -0 0 -1.61e-10"/>
+      <!-- Part body -->
+      <geom type="mesh" class="visual" pos="-0.0794972 -0.0373477 0.0264251" quat="1 0 0 0" mesh="body" material="body_material"/>
+      <geom type="mesh" class="collision" pos="-0.0794972 -0.0373477 0.0264251" quat="1 0 0 0" mesh="body" material="body_material"/>
+    </body>
+    <!-- Link part_1 -->
+    <body name="part_1" pos="0 0 0" quat="1 0 0 0" childclass="onshape">
+      <freejoint name="part_1_freejoint"/>
+      <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+      <!-- Part part_1 -->
+      <geom type="mesh" class="visual" pos="-0.0444972 -0.0768477 0.0088251" quat="0.707107 0 0 -0.707107" mesh="part_1" material="part_1_material"/>
+      <geom type="mesh" class="collision" pos="-0.0444972 -0.0768477 0.0088251" quat="0.707107 0 0 -0.707107" mesh="part_1" material="part_1_material"/>
+    </body>
+    <!-- Link part_1_2 -->
+    <body name="part_1_2" pos="0 0 0" quat="1 0 0 0" childclass="onshape">
+      <freejoint name="part_1_2_freejoint"/>
+      <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+      <!-- Part part_1_2 -->
+      <geom type="mesh" class="visual" pos="-0.114497 -0.109285 0.0088251" quat="0.707107 0 0 0.707107" mesh="part_1__2" material="part_1__2_material"/>
+      <geom type="mesh" class="collision" pos="-0.114497 -0.109285 0.0088251" quat="0.707107 0 0 0.707107" mesh="part_1__2" material="part_1__2_material"/>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="part_1.stl"/>
+    <mesh file="body.stl"/>
+    <mesh file="part_1__2.stl"/>
+    <material name="body_material" rgba="0.972549 0.529412 0.00392157 1"/>
+    <material name="part_1_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="part_1__2_material" rgba="0.615686 0.811765 0.929412 1"/>
+  </asset>
+  <actuator/>
+  <equality/>
+</mujoco>

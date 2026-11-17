@@ -1,0 +1,38 @@
+{
+  "card_color": "orange",
+  "card_serial": "0999",
+  "notification_ms": 20,
+  "stale_seconds": 0.2,
+  "command_ms": 200,
+  "max_percent": 100,
+  "calibration": {
+    "verified": false,
+    "body_axes": [
+      -2,
+      1,
+      3
+    ],
+    "gyro_rad_s_per_raw": 0.017453292519943295,
+    "accel_g_per_raw": 0.0009718801402043173,
+    "heading_rad_per_raw": 0.0017453292519943296,
+    "motor_sign": [
+      1,
+      -1
+    ],
+    "encoder_zero_deg": [
+      0,
+      -2
+    ],
+    "rad_s_at_100_percent": [
+      16.494,
+      14.076
+    ],
+    "status": "automatic_estimate",
+    "notes": [
+      "IMU scales measured from flat gravity and a user-performed 90 degree yaw turn.",
+      "Axis/sign candidate ranked first in two short-pulse MuJoCo fits; model-fit margins 7 and 13 percent, not a fully verified physical calibration.",
+      "Speed conversion extrapolated from moving samples at 20 percent, not measured at 100 percent; contact load causes asymmetric speed.",
+      "Beam zero comes from user-confirmed flat model reference pose."
+    ]
+  }
+}

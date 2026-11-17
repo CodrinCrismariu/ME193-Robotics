@@ -1,0 +1,37 @@
+{
+  "source_video_sha256": "27cc61d6bb034a7fb77f2a3c80450616ebee277cfcf016455a95a2c82685d4e3",
+  "checkpoint": "runs/train-20261116-193502/logs/rsl_rl/beam_drive_straight/2026-11-16_19-35-33/model_299.pt",
+  "checkpoint_sha256": "84114ca03fcac54259d7672a8e5798f7e63b876997b1b895c0a8567ef0f7f060",
+  "policy_selection": "The checkpoint referenced by the Windows deployment README and task hash in policy.json; not the later retrained checkpoint.",
+  "simulation_task": "Current beam task with matching per-motor hardware command saturation.",
+  "duration_s": 20,
+  "sim_fps": 50,
+  "comparison_fps": 30,
+  "policy_start_s_estimated": 3.8,
+  "contact_windows": [
+    {
+      "id": "Hand contact 1",
+      "start_s": 8.48,
+      "end_s": 9.32
+    },
+    {
+      "id": "Hand contact 2",
+      "start_s": 11.9,
+      "end_s": 12.48
+    },
+    {
+      "id": "Hand contact 3",
+      "start_s": 14.6,
+      "end_s": 15.64
+    },
+    {
+      "id": "Hand contact 4",
+      "start_s": 18.96,
+      "end_s": 19.68
+    }
+  ],
+  "forces": "Illustrative world-frame forces/torques with sine-squared envelopes. Not measured or fitted to match the resulting trajectory.",
+  "random_pushes": false,
+  "automatic_resets": false,
+  "validation": "1000 finite telemetry rows; external wrenches zero outside scheduled windows."
+}

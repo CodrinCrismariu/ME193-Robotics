@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.stl binary
+*.pt binary
+*.onnx binary
+*.mp4 binary
+*.mov binary
+*.png binary
+*.jpg binary
+# Preserve raw training logs, including terminal formatting and whitespace.
+*.log -whitespace
