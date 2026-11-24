@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Navigator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <header>
+      <h1>Campus Navigator</h1>
+      <div id="status"><span id="dot" class="dot"></span><span id="status-text">Connecting…</span></div>
+    </header>
+
+    <section class="card">
+      <div class="live-row">
+        <div class="compass" title="Heading since the last turn or waypoint">
+          <div class="arrow" id="arrow">↑</div>
+          <div class="deg" id="deg">0°</div>
+        </div>
+        <div class="numbers">
+          <div><div class="caption">Steps</div><div class="big" id="steps">—</div></div>
+          <div><div class="caption">Distance</div><div class="big" id="distance">—</div></div>
+          <div><div class="caption">Activity</div><div class="big" id="activity" style="font-size:18px">—</div></div>
+        </div>
+      </div>
+      <div class="recent" id="recent"><span class="hint">Turns show up here as you make them.</span></div>
+    </section>
+
+    <section class="card" id="nav-card">
+      <div id="nav-idle">
+        <h2>Navigate</h2>
+        <p class="hint">Where are you?</p>
+        <div class="grid-buttons" id="nav-here"></div>
+        <p class="hint">Where to? <span id="nav-to-hint"></span></p>
+        <div class="grid-buttons" id="nav-goal"></div>
+        <div class="row">
+          <button id="nav-start" class="primary big-button" disabled>Start navigating</button>
+          <span class="hint" id="nav-start-hint"></span>
+        </div>
+      </div>
+      <div id="nav-active" hidden>
+        <div class="nav-now">
+          <div class="nav-arrow" id="nav-arrow">↑</div>
+          <div>
+            <div class="nav-text" id="nav-text">—</div>
+            <div class="hint" id="nav-sub"></div>
+          </div>
+        </div>
+        <div class="message" id="nav-message"></div>
+        <div class="dirs" id="nav-route"></div>
+        <p class="hint">Lost track? Tell it where you are:</p>
+        <div class="row" id="nav-at"></div>
+        <div class="row" style="margin-top:10px"><button id="nav-stop" class="danger">Stop navigating</button></div>
+      </div>
+    </section>
+
+    <section class="card" id="walk-card">
+      <div id="walk-idle">
+        <h2>Record a walk</h2>
+        <form id="settings" class="row">
+          <label>Walker <input id="walker" type="text" maxlength="40" placeholder="Your name" /></label>
+          <label>Height <input id="height" type="number" min="1.2" max="2.2" step="0.01" /> m</label>
+          <button type="submit">Save</button>
+        </form>
+        <p class="calib" id="calib">Stand still for a few seconds: measuring the gyro's drift…</p>
+        <p class="hint">Where are you starting?</p>
+        <div class="grid-buttons" id="start-buttons"></div>
+        <div class="row">
+          <button id="start" class="primary big-button" disabled>Start recording</button>
+          <button id="reset">Reset</button>
+          <span class="hint" id="start-hint"></span>
+        </div>
+      </div>
+      <div id="walk-active" hidden>
+        <div class="walk-head">
+          <div><div class="caption">Walking from</div><div class="where" id="walk-from">—</div></div>
+          <div class="hint" id="walk-stats"></div>
+        </div>
+        <div class="dirs" id="walk-dirs"></div>
+        <p class="hint">At each waypoint, stand still for about 3 seconds (it re-measures the gyro drift), then tap it:</p>
+        <p class="calib" id="recalib" hidden></p>
+        <div class="grid-buttons" id="reach-buttons"></div>
+        <div class="row">
+          <button id="undo">Undo last waypoint</button>
+          <button id="stop" class="primary">Stop recording and save</button>
+          <button id="discard" class="danger">Discard</button>
+        </div>
+      </div>
+      <div class="message" id="message"></div>
+    </section>
+
+    <section class="card">
+      <div class="walk-head">
+        <h2>Saved walks (<span id="walk-count">0</span>)</h2>
+        <a href="walks.zip">Download all (.zip)</a>
+      </div>
+      <p class="hint">Check each walk's directions. Tap a turn to fix it (wrong side, or not a real turn).</p>
+      <div id="walks"></div>
+    </section>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
